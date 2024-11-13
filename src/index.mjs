@@ -5,10 +5,16 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Conexión con la base de datos
-mongoose.connect('mongodb://nico:12345678@127.0.0.1:8083/miapp?authSource=admin')
+/*mongoose.connect('mongodb://nico:12345678@127.0.0.1:8083/miapp?authSource=admin')
+    .then(() => console.log('Conectado a MongoDB'))
+    .catch(err => console.error('Falló la conexión a MongoDB', err));
+*/
+// Conexión con la base de datos
+mongoose.connect(process.env.MONGO_URI)
     .then(() => console.log('Conectado a MongoDB'))
     .catch(err => console.error('Falló la conexión a MongoDB', err));
 
+    
 app.use(express.json());
 
 // Definimos el modelo de usuario

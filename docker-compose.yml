@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  # Servicio de MongoDB
+  mongo:
+    image: mongo:latest
+    container_name: mi_mongo
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=admin
+    ports:
+      - "8083:27017"
+    volumes:
+      - mongo_data:/data/db
+
+  # Servicio de la API de Node.js
+  api:
+    build: .
+    container_name: mi_api
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+      - MONGO_URI=mongodb://admin:admin@mongo:27017/miapp?authSource=admin
+    depends_on:
+      - mongo
+
+volumes:
+  mongo_data:
