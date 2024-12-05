@@ -1,5 +1,7 @@
 import express, { response } from "express";
 import mongoose from "mongoose";
+import cors from "cors";
+
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -15,6 +17,8 @@ mongoose.connect(process.env.MONGO_URI)
     .catch(err => console.error('Falló la conexión a MongoDB', err));
 
     
+// Middleware para CORS
+app.use(cors());
 app.use(express.json());
 
 // Definimos el modelo de usuario

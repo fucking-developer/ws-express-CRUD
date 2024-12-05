@@ -7,6 +7,9 @@ WORKDIR /app
 # Copiamos el package.json y package-lock.json para instalar las dependencias
 COPY package*.json ./
 
+#CORS para consumir api
+RUN npm install cors
+
 # Instalamos las dependencias
 RUN npm install
 
